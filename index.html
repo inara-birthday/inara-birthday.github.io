@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Приглашение · Инара</title>
+<meta property="og:title" content="Тебя приглашают на день рождения">
+<meta property="og:description" content="Открой приглашение">
+<meta name="theme-color" content="#14091f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Marck+Script&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     ПОМЕНЯТЬ ДАННЫЕ МОЖНО НИЖЕ в блоке script → объект CONFIG
+     ============================================================ */
+  :root{
+    --noch:#14091f;      /* фон-база */
+    --sumerki:#2a1338;   /* плам */
+    --sliva:#3d1a4a;     /* глубокая слива */
+    --champagne:#e7c590; /* шампань-золото */
+    --champagne-2:#f3dcab;
+    --roza:#e9a8b9;      /* мягкая роза */
+    --krem:#f6efe6;      /* тёплый кремовый текст */
+    --krem-dim:rgba(246,239,230,.62);
+    --glass:rgba(246,239,230,.045);
+    --glass-brd:rgba(231,197,144,.22);
+    --maxw:560px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:'Manrope',system-ui,sans-serif;
+    color:var(--krem);
+    background:var(--noch);
+    min-height:100vh;
+    min-height:100dvh;
+    overflow-x:hidden;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+  }
+  /* фон: многослойный градиент + мягкие свечения */
+  .bg{
+    position:fixed;inset:0;z-index:-3;
+    background:
+      radial-gradient(120% 90% at 78% -8%, rgba(233,168,185,.20), transparent 55%),
+      radial-gradient(110% 80% at 10% 105%, rgba(231,197,144,.16), transparent 55%),
+      linear-gradient(160deg, #1a0c28 0%, #2a1338 38%, #14091f 100%);
+  }
+  #bokeh{position:fixed;inset:0;z-index:-2;width:100%;height:100%;}
+  .grain{position:fixed;inset:0;z-index:-1;opacity:.05;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px;position:relative;z-index:1;}
+
+  /* ---------- ИНТРО / КОНВЕРТ ---------- */
+  #intro{
+    position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:30px;text-align:center;
+    background:radial-gradient(120% 120% at 50% 30%, #2a1338, #14091f 70%);
+    cursor:pointer;transition:opacity .9s ease, transform .9s ease;
+    padding:24px;
+  }
+  #intro.gone{opacity:0;transform:scale(1.06);pointer-events:none;}
+  .intro-eyebrow{font-family:'Marck Script',cursive;font-size:23px;color:var(--roza);opacity:.9;}
+  .seal{
+    width:118px;height:118px;border-radius:50%;position:relative;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--glass-brd);
+  }
+  .seal::before,.seal::after{content:"";position:absolute;inset:-1px;border-radius:50%;
+    border:1px solid rgba(231,197,144,.5);animation:ring 3.4s ease-out infinite;}
+  .seal::after{animation-delay:1.7s;}
+  @keyframes ring{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.55);opacity:0}}
+  .seal svg{width:46px;height:46px;color:var(--champagne);}
+  .intro-cta{font-family:'Manrope';font-size:13px;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--krem-dim);}
+  .intro-name{font-family:'Playfair Display';font-style:italic;font-size:30px;color:var(--krem);}
+
+  /* ---------- HERO ---------- */
+  .hero{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;padding:90px 0 60px;}
+  .eyebrow{font-family:'Manrope';font-weight:500;font-size:12px;letter-spacing:.42em;
+    text-transform:uppercase;color:var(--champagne);opacity:.85;}
+  .hero .script{font-family:'Marck Script',cursive;font-size:26px;color:var(--roza);margin-top:18px;}
+  .hero h1{
+    font-family:'Playfair Display';font-weight:500;font-size:clamp(72px,26vw,128px);
+    line-height:.95;letter-spacing:-.01em;margin:6px 0 4px;position:relative;
+    background:linear-gradient(105deg,#e7c590 0%,#f7e7c4 28%,#fff6e8 42%,#e9a8b9 60%,#e7c590 86%);
+    background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;
+    animation:shimmer 6s linear infinite;
+  }
+  @keyframes shimmer{to{background-position:220% 0}}
+  .hero .sub{font-family:'Playfair Display';font-style:italic;font-size:clamp(18px,5vw,22px);
+    color:var(--krem-dim);max-width:340px;margin-top:10px;}
+  .scroll-cue{margin-top:54px;display:flex;flex-direction:column;align-items:center;gap:10px;
+    color:var(--krem-dim);font-size:11px;letter-spacing:.3em;text-transform:uppercase;}
+  .scroll-cue .line{width:1px;height:46px;background:linear-gradient(var(--champagne),transparent);
+    animation:drop 2s ease-in-out infinite;transform-origin:top;}
+  @keyframes drop{0%,100%{transform:scaleY(.4);opacity:.4}50%{transform:scaleY(1);opacity:1}}
+
+  /* флёрон-разделитель */
+  .fleuron{display:flex;align-items:center;justify-content:center;gap:14px;margin:0 auto;
+    color:var(--champagne);opacity:.7;}
+  .fleuron span{height:1px;width:64px;background:linear-gradient(90deg,transparent,var(--champagne));}
+  .fleuron span:last-child{background:linear-gradient(90deg,var(--champagne),transparent);}
+  .fleuron svg{width:16px;height:16px;}
+
+  /* ---------- СЕКЦИИ ---------- */
+  section{padding:62px 0;}
+  .lbl{font-family:'Manrope';font-weight:500;font-size:12px;letter-spacing:.38em;
+    text-transform:uppercase;color:var(--champagne);opacity:.8;text-align:center;margin-bottom:30px;}
+
+  /* таймер */
+  .count{display:flex;justify-content:center;gap:10px;}
+  .tile{flex:1;max-width:118px;background:var(--glass);border:1px solid var(--glass-brd);
+    border-radius:16px;padding:18px 8px 14px;text-align:center;backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);}
+  .tile .num{font-family:'Playfair Display';font-size:clamp(30px,9vw,42px);line-height:1;color:var(--krem);}
+  .tile .cap{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--krem-dim);margin-top:8px;}
+  .count-done{text-align:center;font-family:'Playfair Display';font-style:italic;font-size:24px;color:var(--champagne);}
+
+  /* детали */
+  .card{background:var(--glass);border:1px solid var(--glass-brd);border-radius:20px;
+    padding:8px 22px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
+  .row{display:flex;align-items:center;gap:18px;padding:20px 0;border-bottom:1px solid rgba(231,197,144,.13);}
+  .row:last-child{border-bottom:none;}
+  .row .ic{width:42px;height:42px;flex:none;border-radius:50%;display:flex;align-items:center;
+    justify-content:center;border:1px solid var(--glass-brd);color:var(--champagne);}
+  .row .ic svg{width:20px;height:20px;}
+  .row .k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--krem-dim);}
+  .row .v{font-family:'Playfair Display';font-size:21px;color:var(--krem);line-height:1.25;}
+  .row .v small{display:block;font-family:'Manrope';font-size:13px;color:var(--krem-dim);letter-spacing:.02em;margin-top:2px;}
+
+  .map-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:16px;
+    padding:15px;border-radius:14px;border:1px solid var(--glass-brd);background:transparent;
+    color:var(--champagne);font-family:'Manrope';font-weight:500;font-size:13px;letter-spacing:.12em;
+    text-transform:uppercase;text-decoration:none;transition:.25s;}
+  .map-btn:hover{background:rgba(231,197,144,.08);}
+  .map-btn svg{width:17px;height:17px;}
+
+  /* RSVP */
+  .rsvp{text-align:center;}
+  .rsvp .q{font-family:'Playfair Display';font-style:italic;font-size:clamp(26px,7vw,34px);
+    color:var(--krem);max-width:380px;margin:0 auto 8px;}
+  .rsvp .hint{color:var(--krem-dim);font-size:14px;margin-bottom:28px;}
+  .rsvp-btns{display:flex;flex-direction:column;gap:12px;max-width:340px;margin:0 auto;}
+  .btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:17px;border-radius:14px;
+    font-family:'Manrope';font-weight:600;font-size:15px;letter-spacing:.04em;cursor:pointer;
+    text-decoration:none;border:1px solid transparent;transition:transform .2s, box-shadow .25s, background .25s;}
+  .btn:active{transform:scale(.97);}
+  .btn-yes{background:linear-gradient(105deg,var(--champagne),var(--champagne-2));color:#2a1338;
+    box-shadow:0 10px 30px -10px rgba(231,197,144,.6);}
+  .btn-yes:hover{box-shadow:0 14px 40px -10px rgba(231,197,144,.85);}
+  .btn-no{background:transparent;border-color:var(--glass-brd);color:var(--krem-dim);}
+  .btn-no:hover{color:var(--krem);border-color:var(--roza);}
+  .btn svg{width:18px;height:18px;}
+
+  /* подвал */
+  footer{text-align:center;padding:50px 0 70px;}
+  footer .sig{font-family:'Marck Script',cursive;font-size:25px;color:var(--roza);}
+  footer .heart{color:var(--champagne);margin-top:14px;opacity:.6;}
+  footer .heart svg{width:20px;height:20px;animation:beat 2.4s ease-in-out infinite;}
+  @keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+
+  /* появление при скролле */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease, transform .9s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  #confetti{position:fixed;inset:0;z-index:40;pointer-events:none;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none!important;transition:opacity .3s ease!important;}
+    .reveal{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+  <div class="bg"></div>
+  <canvas id="bokeh"></canvas>
+  <div class="grain"></div>
+  <canvas id="confetti"></canvas>
+
+  <!-- ИНТРО -->
+  <div id="intro">
+    <div class="intro-eyebrow" id="i-eyebrow">для тебя</div>
+    <div class="seal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 7l9 6 9-6M3 7v10a1 1 0 001 1h16a1 1 0 001-1V7M3 7a1 1 0 011-1h16a1 1 0 011 1"/></svg>
+    </div>
+    <div class="intro-name" id="i-name">Инара</div>
+    <div class="intro-cta">нажми, чтобы открыть</div>
+  </div>
+
+  <main class="wrap">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="eyebrow reveal" id="h-eyebrow">Приглашение</div>
+      <div class="script reveal" id="h-script" style="transition-delay:.1s">с днём рождения</div>
+      <h1 class="reveal" id="h-name" style="transition-delay:.15s">Инара</h1>
+      <div class="sub reveal" id="h-sub" style="transition-delay:.25s">приглашает тебя отметить этот вечер вместе</div>
+      <div class="scroll-cue reveal" style="transition-delay:.4s">
+        <span>листай</span><span class="line"></span>
+      </div>
+    </header>
+
+    <!-- ТАЙМЕР -->
+    <section>
+      <div class="lbl reveal">до праздника</div>
+      <div class="count reveal" id="count" style="transition-delay:.1s">
+        <div class="tile"><div class="num" id="d">0</div><div class="cap">дней</div></div>
+        <div class="tile"><div class="num" id="h">0</div><div class="cap">часов</div></div>
+        <div class="tile"><div class="num" id="m">0</div><div class="cap">минут</div></div>
+        <div class="tile"><div class="num" id="s">0</div><div class="cap">секунд</div></div>
+      </div>
+    </section>
+
+    <div class="fleuron reveal"><span></span>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg>
+      <span></span></div>
+
+    <!-- ДЕТАЛИ -->
+    <section>
+      <div class="lbl reveal">детали вечера</div>
+      <div class="card reveal" style="transition-delay:.1s">
+        <div class="row">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+          <div><div class="k">когда</div><div class="v" id="v-date">15 июля<small id="v-weekday">среда</small></div></div>
+        </div>
+        <div class="row">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <div><div class="k">во сколько</div><div class="v" id="v-time">19:00</div></div>
+        </div>
+        <div class="row">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-5.6-7-11a7 7 0 1114 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+          <div><div class="k">где</div><div class="v" id="v-venue">Название места<small id="v-address">Астана, ул. Примерная, 1</small></div></div>
+        </div>
+        <div class="row">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2l3 6-3 13 6-4 6 4-3-13 3-6"/></svg></div>
+          <div><div class="k">дресс-код</div><div class="v" id="v-dress">Smart casual</div></div>
+        </div>
+        <a class="map-btn reveal" id="map-btn" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 20l-5.5 2V6L9 4m0 16l6-2m-6 2V4m6 14l5.5 2V6L15 4m0 14V4M9 4l6 0"/></svg>
+          открыть на карте
+        </a>
+      </div>
+    </section>
+
+    <div class="fleuron reveal"><span></span>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg>
+      <span></span></div>
+
+    <!-- RSVP -->
+    <section class="rsvp">
+      <div class="q reveal">Придёшь?</div>
+      <div class="hint reveal" style="transition-delay:.08s">дай знать Инаре, чтобы она тебя ждала</div>
+      <div class="rsvp-btns reveal" style="transition-delay:.15s">
+        <a class="btn btn-yes" id="yes" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>
+          Я приду
+        </a>
+        <a class="btn btn-no" id="no" href="#" target="_blank" rel="noopener">не смогу в этот раз</a>
+      </div>
+    </section>
+
+    <footer>
+      <div class="fleuron" style="margin-bottom:24px"><span></span>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg>
+        <span></span></div>
+      <div class="sig" id="f-sig">с любовью, Инара</div>
+      <div class="heart"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-9.5-9C1 9 2.5 5.5 6 5.5c2 0 3.2 1.2 4 2.5.8-1.3 2-2.5 4-2.5 3.5 0 5 3.5 3.5 6.5C19 16.5 12 21 12 21z"/></svg></div>
+    </footer>
+  </main>
+
+<script>
+  /* ============================================================
+     ★★★  ПОМЕНЯЙ СВОИ ДАННЫЕ ЗДЕСЬ  ★★★
+     ============================================================ */
+  const CONFIG = {
+    name:        "Инара",            // имя именинницы
+    eyebrow:     "Приглашение",      // надпись над именем
+    script:      "с днём рождения",  // курсивная строка-подпись
+    subtitle:    "приглашает тебя отметить этот вечер вместе",
+    introHint:   "для тебя",
+
+    // дата и время для ТАЙМЕРА (формат ГГГГ-ММ-ДДTчч:мм:сс)
+    targetDate:  "2026-07-15T19:00:00",
+
+    // как показать в деталях
+    displayDate: "15 июля",
+    weekday:     "среда",
+    time:        "19:00",
+    venue:       "Название места",
+    address:     "Астана, ул. Примерная, 1",
+    mapUrl:      "https://www.google.com/maps/search/?api=1&query=Астана",
+    dressCode:   "Smart casual",
+
+    // телефон Инары для RSVP (только цифры, без + и пробелов)
+    whatsapp:    "77001234567",
+    signature:   "с любовью, Инара"
+  };
+  /* ============================================================ */
+
+  // --- подставляем тексты ---
+  const $ = id => document.getElementById(id);
+  $('i-eyebrow').textContent = CONFIG.introHint;
+  $('i-name').textContent = CONFIG.name;
+  $('h-eyebrow').textContent = CONFIG.eyebrow;
+  $('h-script').textContent = CONFIG.script;
+  $('h-name').textContent = CONFIG.name;
+  $('h-sub').textContent = CONFIG.subtitle;
+  $('v-date').firstChild.textContent = CONFIG.displayDate;
+  $('v-weekday').textContent = CONFIG.weekday;
+  $('v-time').textContent = CONFIG.time;
+  $('v-venue').firstChild.textContent = CONFIG.venue;
+  $('v-address').textContent = CONFIG.address;
+  $('v-dress').textContent = CONFIG.dressCode;
+  $('map-btn').href = CONFIG.mapUrl;
+  $('f-sig').textContent = CONFIG.signature;
+  document.title = 'Приглашение · ' + CONFIG.name;
+
+  const wa = t => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(t)}`;
+  $('yes').href = wa(`Привет! Я приду на день рождения ${CONFIG.name} ${CONFIG.displayDate} 🎉`);
+  $('no').href  = wa(`Привет! Спасибо за приглашение, но в этот раз не смогу прийти 🙏`);
+
+  // --- интро ---
+  const intro = $('intro');
+  const openIntro = () => { intro.classList.add('gone'); document.body.style.overflow=''; };
+  document.body.style.overflow = 'hidden';
+  intro.addEventListener('click', openIntro);
+
+  // --- появление при скролле ---
+  const io = new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // --- таймер ---
+  const target = new Date(CONFIG.targetDate).getTime();
+  const pad = n => String(n).padStart(2,'0');
+  function tick(){
+    const diff = target - Date.now();
+    if(diff <= 0){
+      $('count').innerHTML = '<div class="count-done">Праздник уже здесь 🎉</div>';
+      clearInterval(timer); return;
+    }
+    const d = Math.floor(diff/864e5);
+    const h = Math.floor(diff%864e5/36e5);
+    const m = Math.floor(diff%36e5/6e4);
+    const s = Math.floor(diff%6e4/1e3);
+    $('d').textContent=d; $('h').textContent=pad(h); $('m').textContent=pad(m); $('s').textContent=pad(s);
+  }
+  tick(); const timer = setInterval(tick,1000);
+
+  // --- боке-частицы ---
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const bc = $('bokeh'), bx = bc.getContext('2d');
+  let W,H,parts=[];
+  const COLORS = ['231,197,144','233,168,185','246,239,230'];
+  function resize(){ W=bc.width=innerWidth; H=bc.height=innerHeight;
+    const n = innerWidth<600?16:26; parts=[];
+    for(let i=0;i<n;i++) parts.push({
+      x:Math.random()*W, y:Math.random()*H, r:Math.random()*42+10,
+      c:COLORS[(Math.random()*COLORS.length)|0],
+      a:Math.random()*.18+.05, vy:-(Math.random()*.25+.05), vx:(Math.random()-.5)*.15,
+      ph:Math.random()*Math.PI*2
+    });
+  }
+  resize(); addEventListener('resize',resize);
+  function draw(){
+    bx.clearRect(0,0,W,H);
+    for(const p of parts){
+      if(!reduce){ p.y+=p.vy; p.x+=p.vx+Math.sin(p.ph+=0.005)*0.2;
+        if(p.y< -p.r){p.y=H+p.r;p.x=Math.random()*W;} if(p.x<-p.r)p.x=W+p.r; if(p.x>W+p.r)p.x=-p.r; }
+      const g=bx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r);
+      g.addColorStop(0,`rgba(${p.c},${p.a})`); g.addColorStop(1,`rgba(${p.c},0)`);
+      bx.fillStyle=g; bx.beginPath(); bx.arc(p.x,p.y,p.r,0,7); bx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+  // --- конфетти при «Я приду» ---
+  const cc=$('confetti'), cx=cc.getContext('2d'); let cw,ch,conf=[],raf;
+  function csize(){cw=cc.width=innerWidth;ch=cc.height=innerHeight;}
+  csize(); addEventListener('resize',csize);
+  function burst(){
+    if(reduce) return;
+    const cols=['#e7c590','#f3dcab','#e9a8b9','#f6efe6'];
+    for(let i=0;i<140;i++) conf.push({
+      x:cw/2, y:ch*0.62, r:Math.random()*6+3,
+      vx:(Math.random()-.5)*14, vy:Math.random()*-15-4,
+      c:cols[(Math.random()*cols.length)|0], rot:Math.random()*6, vr:(Math.random()-.5)*.4, life:1
+    });
+    cancelAnimationFrame(raf); cfall();
+  }
+  function cfall(){
+    cx.clearRect(0,0,cw,ch); let alive=false;
+    for(const p of conf){
+      if(p.life<=0) continue; alive=true;
+      p.vy+=.4; p.x+=p.vx; p.y+=p.vy; p.vx*=.99; p.rot+=p.vr; p.life-=.009;
+      cx.save(); cx.translate(p.x,p.y); cx.rotate(p.rot); cx.globalAlpha=Math.max(p.life,0);
+      cx.fillStyle=p.c; cx.fillRect(-p.r/2,-p.r/2,p.r,p.r*1.6); cx.restore();
+    }
+    if(alive) raf=requestAnimationFrame(cfall); else conf=[];
+  }
+  $('yes').addEventListener('click', burst);
+</script>
+</body>
+</html>
