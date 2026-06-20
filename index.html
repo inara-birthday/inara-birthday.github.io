@@ -230,10 +230,6 @@
           <div><div class="k">когда</div><div class="v" id="v-date">15 июля<small id="v-weekday">среда</small></div></div>
         </div>
         <div class="row">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-          <div><div class="k">во сколько</div><div class="v" id="v-time">19:00</div></div>
-        </div>
-        <div class="row">
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-5.6-7-11a7 7 0 1114 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
           <div><div class="k">где</div><div class="v" id="v-venue">Название места<small id="v-address">Астана, ул. Примерная, 1</small></div></div>
         </div>
@@ -283,15 +279,14 @@
     eyebrow:     "Приглашение",      // надпись над именем
     script:      "с днём рождения",  // курсивная строка-подпись
     subtitle:    "приглашает тебя отметить этот вечер вместе",
-    introHint:   "для тебя",
+    introHint:   "от Инары",        // надпись на конверте-интро
 
-    // дата и время для ТАЙМЕРА (формат ГГГГ-ММ-ДДTчч:мм:сс)
-    targetDate:  "2026-07-15T19:00:00",
+    // дата для ТАЙМЕРА (формат ГГГГ-ММ-ДДTчч:мм:сс)
+    targetDate:  "2026-07-21T00:00:00",
 
     // как показать в деталях
-    displayDate: "15 июля",
-    weekday:     "среда",
-    time:        "19:00",
+    displayDate: "21 июля",
+    weekday:     "вторник",
     venue:       "Название места",
     address:     "Астана, ул. Примерная, 1",
     mapUrl:      "https://www.google.com/maps/search/?api=1&query=Астана",
@@ -313,7 +308,6 @@
   $('h-sub').textContent = CONFIG.subtitle;
   $('v-date').firstChild.textContent = CONFIG.displayDate;
   $('v-weekday').textContent = CONFIG.weekday;
-  $('v-time').textContent = CONFIG.time;
   $('v-venue').firstChild.textContent = CONFIG.venue;
   $('v-address').textContent = CONFIG.address;
   $('v-dress').textContent = CONFIG.dressCode;
